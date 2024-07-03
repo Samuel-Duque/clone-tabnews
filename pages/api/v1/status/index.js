@@ -16,11 +16,12 @@ async function status(request, response) {
   const postgresV = versionPost.rows[0].server_version;
 
   const MaxConnections = await pool.query("SHOW max_connections");
+  const NumMaxConnections = MaxConnections.rows[0].max_connections;
 
   response.status(200).json({
     updated_at: updatedAt,
     postgres_version: postgresV,
-    max_connections: MaxConnections,
+    max_connections: NumMaxConnections,
   });
 }
 
